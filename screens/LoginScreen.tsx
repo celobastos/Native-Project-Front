@@ -1,10 +1,11 @@
 import React, { useState, useRef } from 'react';
-import { StyleSheet, View, Text, ScrollView, Animated, Alert } from 'react-native';
+import { View, Text, ScrollView, Animated, Alert } from 'react-native';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { RootStackParamList } from './types/types';
 import LoginButtons from '../components/LoginButtons';
 import LoginForm from '../components/LoginForm';
 import BackButton from '../components/BackButton';
+import styles from '../styles/LoginScreenStyles';
 
 const LoginScreen: React.FC = () => {
   const [loginPressed, setLoginPressed] = useState(false);
@@ -94,38 +95,5 @@ const LoginScreen: React.FC = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#bfbcf3',
-  },
-  background: {
-    flexGrow: 1,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    width: '100%',
-  },
-  title: {
-    marginTop: 60,
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#000',
-  },
-  buttonContainer: {
-    width: '80%',
-    alignItems: 'center',
-    marginBottom: 60,
-    flex: 1,
-    justifyContent: 'flex-end',
-  },
-  loginForm: {
-    width: '80%',
-    borderWidth: 0,
-    alignItems: 'center',
-  },
-});
 
 export default LoginScreen;

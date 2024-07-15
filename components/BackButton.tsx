@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import styles from '../styles/BackButtonStyles';
 
 interface BackButtonProps {
   onPress: () => void;
@@ -13,14 +14,5 @@ const BackButton: React.FC<BackButtonProps> = ({ onPress }) => {
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  backButton: {
-    position: 'absolute',
-    top: 40,
-    left: 20,
-    zIndex: 1,
-  },
-});
 
 export default BackButton;
