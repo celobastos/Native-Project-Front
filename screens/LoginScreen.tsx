@@ -37,7 +37,7 @@ const LoginScreen: React.FC = () => {
 
   const handleLoginSubmit = async () => {
     try {
-      const response = await fetch('http://localhost:3000/auth/login', {
+      const response = await fetch('http://192.168.15.145:3000/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
