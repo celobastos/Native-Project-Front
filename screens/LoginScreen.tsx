@@ -80,10 +80,18 @@ const LoginScreen: React.FC = () => {
         <View style={styles.buttonContainer}>
           {!loginPressed ? (
             <>
-              <TouchableOpacity style={styles.loginButton} onPress={handleLoginPress}>
+              <TouchableOpacity
+                style={styles.loginButton}
+                onPress={handleLoginPress}
+                activeOpacity={4}
+              >
                 <Text style={styles.buttonText}>Login</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.registerButton} onPress={() => Alert.alert('Register', 'Functionality not implemented')}>
+              <TouchableOpacity
+                style={styles.registerButton}
+                onPress={() => Alert.alert('Register', 'Functionality not implemented')}
+                activeOpacity={0.8}
+              >
                 <Text style={styles.buttonText}>Cadastre-se</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => Alert.alert('Privacy Policy', 'Functionality not implemented')} style={styles.privacyButton}>
@@ -107,10 +115,18 @@ const LoginScreen: React.FC = () => {
                 onChangeText={setPassword}
                 secureTextEntry
               />
-              {error ? <Text style={styles.errorText}>{error}</Text> : null}
-              <TouchableOpacity style={styles.loginButton} onPress={handleLoginSubmit}>
+              <TouchableOpacity
+                style={styles.loginButton}
+                onPress={handleLoginSubmit}
+                activeOpacity={0.8}
+              >
                 <Text style={styles.buttonText}>Entrar</Text>
               </TouchableOpacity>
+              {error ? (
+                <View style={styles.errorContainer}>
+                  <Text style={styles.errorText}>{error}</Text>
+                </View>
+              ) : null}
             </Animated.View>
           )}
         </View>
@@ -156,7 +172,12 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 24,
     marginBottom: 10,
-    width: 350
+    width: 350,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 5,
   },
   registerButton: {
     backgroundColor: 'transparent',
@@ -165,7 +186,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#000',
     marginBottom: 30,
-    width: 350
+    width: 350,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 5,
   },
   buttonText: {
     textAlign: 'center',
@@ -183,6 +209,7 @@ const styles = StyleSheet.create({
   },
   loginForm: {
     width: '80%',
+    borderWidth:0,
     alignItems: 'center',
   },
   input: {
@@ -195,9 +222,16 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     borderColor: 'transparent',
   },
+  errorContainer: {
+    position: 'absolute',
+    bottom: -50,
+    width: '100%',
+    alignItems: 'center',
+  },
   errorText: {
     color: 'red',  // Styling for the error message
     marginBottom: 20,
+    marginTop:20
   },
 });
 
