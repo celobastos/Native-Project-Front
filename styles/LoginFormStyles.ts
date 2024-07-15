@@ -10,6 +10,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderWidth: 0,
     borderColor: 'transparent',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 5,
   },
   loginButton: {
     backgroundColor: '#f1feac',
@@ -22,6 +27,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 3,
     elevation: 5,
+    borderWidth: 0, // Garantir que não haja borda
+    borderColor: 'transparent', // Garantir que não haja cor de borda
   },
   buttonText: {
     textAlign: 'center',
