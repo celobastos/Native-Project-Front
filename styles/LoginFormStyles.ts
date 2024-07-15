@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 3,
     elevation: 5,
-    borderWidth: 0, // Garantir que não haja borda
-    borderColor: 'transparent', // Garantir que não haja cor de borda
+    borderWidth: 0,
+    borderColor: 'transparent', 
   },
   buttonText: {
     textAlign: 'center',

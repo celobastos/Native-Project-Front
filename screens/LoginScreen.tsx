@@ -7,8 +7,10 @@ import LoginForm from '../components/LoginForm';
 import BackButton from '../components/BackButton';
 import CookieImage from '../assets/Cookie.svg'; 
 import styles from '../styles/LoginScreenStyles';
+import { useCustomFont } from '../App'; 
 
 const LoginScreen: React.FC = () => {
+  const font = useCustomFont(); 
   const [loginPressed, setLoginPressed] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -75,7 +77,7 @@ const LoginScreen: React.FC = () => {
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.background}>
         {loginPressed && <BackButton onPress={handleBackPress} />}
-        <Text style={styles.title}>Emporio Cookie</Text>
+        <Text style={[styles.title, { fontFamily: font }]}>Emporio Cookie</Text>
         <Image source={{ uri: CookieImage }} style={{ width: 100, height: 100 }} />
         <View style={styles.buttonContainer}>
           {!loginPressed ? (
