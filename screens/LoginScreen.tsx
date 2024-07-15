@@ -5,7 +5,7 @@ import { RootStackParamList } from './types/types';
 import LoginButtons from '../components/LoginButtons';
 import LoginForm from '../components/LoginForm';
 import BackButton from '../components/BackButton';
-import CookieImage from '../assets/Cookie.svg'; // Adjust the path as necessary
+import CookieImage from '../assets/Cookie.svg'; 
 import styles from '../styles/LoginScreenStyles';
 
 const LoginScreen: React.FC = () => {
@@ -76,7 +76,7 @@ const LoginScreen: React.FC = () => {
       <ScrollView contentContainerStyle={styles.background}>
         {loginPressed && <BackButton onPress={handleBackPress} />}
         <Text style={styles.title}>Emporio Cookie</Text>
-        <Image source={{ uri: CookieImage }} style={{ width: 100, height: 100 }} /> {/* Adjust the size as needed */}
+        <Image source={{ uri: CookieImage }} style={{ width: 100, height: 100 }} />
         <View style={styles.buttonContainer}>
           {!loginPressed ? (
             <LoginButtons onLoginPress={handleLoginPress} />
