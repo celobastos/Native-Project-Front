@@ -1,9 +1,10 @@
-// src/screens/LoginScreen.tsx
 import React, { useState, useRef } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Animated, TextInput, Alert } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { StyleSheet, View, Text, ScrollView, Animated, Alert } from 'react-native';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { RootStackParamList } from './types/types';
+import LoginButtons from '../components/LoginButtons';
+import LoginForm from '../components/LoginForm';
+import BackButton from '../components/BackButton';
 
 const LoginScreen: React.FC = () => {
   const [loginPressed, setLoginPressed] = useState(false);
@@ -11,7 +12,7 @@ const LoginScreen: React.FC = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const fadeAnim = useRef(new Animated.Value(0)).current;
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>(); // Use the types
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const handleLoginPress = () => {
     setLoginPressed(true);
@@ -53,7 +54,7 @@ const LoginScreen: React.FC = () => {
       } else if (response.ok) {
         if (data.token) {
           Alert.alert('Login successful', `Token: ${data.token}`);
-          navigation.navigate('Home');  // Navigate to the Home screen on successful login
+          navigation.navigate('Home');
         } else {
           Alert.alert('Login failed', data.message || 'Unknown error occurred');
         }
@@ -71,62 +72,21 @@ const LoginScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.background}>
-        {loginPressed && (
-          <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
-            <Ionicons name="arrow-back" size={24} color="black" />
-          </TouchableOpacity>
-        )}
+        {loginPressed && <BackButton onPress={handleBackPress} />}
         <Text style={styles.title}>Amo minha namorada</Text>
         <View style={styles.buttonContainer}>
           {!loginPressed ? (
-            <>
-              <TouchableOpacity
-                style={styles.loginButton}
-                onPress={handleLoginPress}
-                activeOpacity={4}
-              >
-                <Text style={styles.buttonText}>Login</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.registerButton}
-                onPress={() => Alert.alert('Register', 'Functionality not implemented')}
-                activeOpacity={0.8}
-              >
-                <Text style={styles.buttonText}>Cadastre-se</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => Alert.alert('Privacy Policy', 'Functionality not implemented')} style={styles.privacyButton}>
-                <Text style={styles.privacyText}>Política de Privacidade</Text>
-              </TouchableOpacity>
-            </>
+            <LoginButtons onLoginPress={handleLoginPress} />
           ) : (
             <Animated.View style={[styles.loginForm, { opacity: fadeAnim }]}>
-              <TextInput
-                style={styles.input}
-                placeholder="Usuário"
-                value={email}
-                onChangeText={setEmail}
-                autoCapitalize="none"
-                keyboardType="email-address"
+              <LoginForm
+                email={email}
+                setEmail={setEmail}
+                password={password}
+                setPassword={setPassword}
+                onSubmit={handleLoginSubmit}
+                error={error}
               />
-              <TextInput
-                style={styles.input}
-                placeholder="Senha"
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry
-              />
-              <TouchableOpacity
-                style={styles.loginButton}
-                onPress={handleLoginSubmit}
-                activeOpacity={0.8}
-              >
-                <Text style={styles.buttonText}>Entrar</Text>
-              </TouchableOpacity>
-              {error ? (
-                <View style={styles.errorContainer}>
-                  <Text style={styles.errorText}>{error}</Text>
-                </View>
-              ) : null}
             </Animated.View>
           )}
         </View>
@@ -146,13 +106,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
-    width: '100%'
-  },
-  backButton: {
-    position: 'absolute',
-    top: 40,
-    left: 20,
-    zIndex: 1,
+    width: '100%',
   },
   title: {
     marginTop: 60,
@@ -167,71 +121,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
   },
-  loginButton: {
-    backgroundColor: '#f1feac',
-    padding: 10,
-    borderRadius: 24,
-    marginBottom: 10,
-    width: 350,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 3,
-    elevation: 5,
-  },
-  registerButton: {
-    backgroundColor: 'transparent',
-    padding: 10,
-    borderRadius: 24,
-    borderWidth: 1,
-    borderColor: '#000',
-    marginBottom: 30,
-    width: 350,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 3,
-    elevation: 5,
-  },
-  buttonText: {
-    textAlign: 'center',
-    color: '#000',
-    fontWeight: 'bold'
-  },
-  privacyText: {
-    textAlign: 'center',
-    color: '#000',
-    fontWeight: 'bold',
-    textDecorationLine: 'underline'
-  },
-  privacyButton: {
-    marginBottom: 10
-  },
   loginForm: {
     width: '80%',
-    borderWidth:0,
-    alignItems: 'center',
-  },
-  input: {
-    height: 40,
-    borderRadius: 24,
-    marginBottom: 20,
-    paddingHorizontal: 10,
-    width: 350,
-    backgroundColor: '#fff',
     borderWidth: 0,
-    borderColor: 'transparent',
-  },
-  errorContainer: {
-    position: 'absolute',
-    bottom: -50,
-    width: '100%',
     alignItems: 'center',
-  },
-  errorText: {
-    color: 'red',  // Styling for the error message
-    marginBottom: 20,
-    marginTop:20
   },
 });
 
